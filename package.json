@@ -1,0 +1,14 @@
+{
+  "name": "guildhelper",
+  "version": "1.0.0",
+  "description": "\"My first express app\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "\"Jakub\"",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
