@@ -10,7 +10,7 @@ const DEFAULT_STORAGE_PATH = path.join(__dirname, "storage", "characters.json");
 
 class CharacterDao {
   constructor(storagePath) {
-    this.bookStoragePath = storagePath ? storagePath : DEFAULT_STORAGE_PATH;
+    this.characterStoragePath = storagePath ? storagePath : DEFAULT_STORAGE_PATH;
   }
 
   // 2
@@ -59,6 +59,10 @@ class CharacterDao {
       }
     }
     return characters;
+  }
+
+  async listAllCharacters() {
+    return await this._loadAllCharacters();
   }
 
   
