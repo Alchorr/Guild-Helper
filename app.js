@@ -1,16 +1,16 @@
-//read module express 
+"use strict";
+
 const express = require("express");
-//initialization of a new Express.js server
+const characterRouter = require("./controller/character-controller");
+
 const app = express();
-//specification of the port on which the application should run on localhost 
-const port = 3000;
 
-//simple route definition with HTTP GET method that returns text
-app.get("/", (req, res) => {
-  res.send('Hello World!')
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-//setting the port on which the HTTP server should run  
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.use("/character", characterRouter);
+
+
+app.listen(3000, () => {
+  console.log("Express server listening on port 3000.")
 });
