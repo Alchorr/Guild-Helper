@@ -8,14 +8,14 @@ const wf = fs.promises.writeFile;
 // 1
 const DEFAULT_STORAGE_PATH = path.join(__dirname, "storage", "characters.json");
 
-class LibraryDao {
+class CharacterDao {
   constructor(storagePath) {
     this.bookStoragePath = storagePath ? storagePath : DEFAULT_STORAGE_PATH;
   }
 
   // 2
   async getCharacter(id) {
-    let characters = await this._loadAllBooks();
+    let characters = await this._loadAllCharacters();
 
     const result = characters.find(b => {
       return b.id === id;
@@ -26,11 +26,11 @@ class LibraryDao {
 
   // 3
   async addCharacter(character) {
-    const characters = await this._loadAllBooks();
+    const characters = await this._loadAllCharacters();
 
     if (this._isDuplicate(characters, character.id)) {
       const e = new Error(`Character with id '${character.id}' already exists.`);
-      e.id = "DUPLICATE_CODE";
+      e.id = "DUPLICATE_ID";
       throw e;
     }
 
@@ -45,7 +45,7 @@ class LibraryDao {
   }
 
   // 4
-  async _loadAllBooks() {
+  async _loadAllCharacters() {
     let characters;
     try {
       characters = JSON.parse(await rf(this._getStorageLocation()));
@@ -75,4 +75,4 @@ class LibraryDao {
   }
 }
 
-module.exports = LibraryDao; 
+module.exports = CharacterDao; 

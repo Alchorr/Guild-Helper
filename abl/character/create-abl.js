@@ -3,8 +3,8 @@ const CharacterDao = require("../../dao/character-dao");
 let dao = new CharacterDao(path.join(__dirname, "..", "..", "storage", "characters.json"))
 
 async function CreateAbl(body, res) {
-  if (!body.id || !body.name || !body.author) {
-    return res.status(400).json({error: 'Invalid input: id parameter is missing.'});
+  if (!body.id || !body.name || !body.playerId || !body.guildId || !body.characterClassiD) {
+    return res.status(400).json({error: 'Invalid input: parameter is missing.'});
   }
 
   const character = {
@@ -18,7 +18,7 @@ async function CreateAbl(body, res) {
   try {
     await dao.addCharacter(character);
   } catch (e) {
-    if (e.id === "DUPLICATE_CODE") {
+    if (e.id === "DUPLICATE_ID") {
       res.status(400);
     } else {
       res.status(500);
